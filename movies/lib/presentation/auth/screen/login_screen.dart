@@ -141,7 +141,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                         as String);
                             //     .then((value) => print(value))
                             //     .onError((error, stackTrace) => print(error));
-                            // // context.goNamed(HomeScreen.routeName);
+                            context.goNamed(HomeScreen.routeName);
                           },
                         ),
                       ],
