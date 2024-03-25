@@ -1,15 +1,19 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies/core/constant/string.dart';
 import 'package:movies/core/constant/theme.dart';
 import 'package:movies/core/navigation/routers.dart';
+import 'package:movies/firebase_options.dart';
 void main() {
 
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    runApp(const ProviderScope(
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+      runApp(const ProviderScope(
         child: MyApp()));
   }, (error, stack) {
     print(error);

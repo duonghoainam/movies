@@ -34,7 +34,6 @@ class ApiService {
   }
 
   Future<dynamic> getList(String path, {Map<String, dynamic>? query}) async {
-    print(path);
     return _dio
         .get(path, queryParameters: query)
         .then((value) => value.data)
