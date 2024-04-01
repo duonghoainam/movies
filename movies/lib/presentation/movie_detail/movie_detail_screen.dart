@@ -7,8 +7,11 @@ import 'package:movies/core/model/movie.dart';
 import 'package:movies/core/prefs_instance.dart';
 import 'package:movies/core/until/untils.dart';
 import 'package:movies/core/widget/actor_circle_widget.dart';
+import 'package:movies/presentation/favorite/favorites_screen.dart';
 
-// FutureProvider isSavedProvider = FutureProvider<bool>((ref) => false);
+final isSavedProvider = FutureProvider.family<bool, String>((ref, id) {
+  return PrefsInstance().checkFavorites(id);
+});
 
 class MovieDetailScreen extends ConsumerWidget {
   static const String routeName = 'movieDetail';
@@ -17,7 +20,7 @@ class MovieDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-
+    final isSaved = ref.watch(isSavedProvider(movie.id));
     return Scaffold(
       backgroundColor: AppColors.backgroundApp,
       extendBodyBehindAppBar: true,
@@ -88,15 +91,21 @@ class MovieDetailScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    IconButton(onPressed: () async {
-                      var isSaved = await PrefsInstance().checkFavorites(movie.id);
+                    isSaved.when(
+                      loading: () => Icon(Icons.favorite_border, color: AppColors.white,),
+                      error: (error, stackTrace) => Icon(Icons.favorite_border, color: AppColors.white,),
+                      data: (data) => IconButton(onPressed: () async {
+                        if (data){
+                          PrefsInstance().removeFavorites(movie.id);
 
-                      if (isSaved){
-                        PrefsInstance().removeFavorites(movie.id);
-                      } else {
-                        PrefsInstance().addFavorite(movie.id);
-                      }
-                    }, icon: Icon(Icons.favorite_border, color: AppColors.white,))
+                        } else {
+                          PrefsInstance().addFavorite(movie.id);
+                        }
+                        ref.refresh(isSavedProvider(movie.id).future);
+                        ref.refresh(favoritesProvider);
+
+                      }, icon: Icon(data? Icons.favorite_outlined :Icons.favorite_border, color: data? AppColors.red : AppColors.white,)),
+                    )
                   ],
                 ),
                 if (movie.imdbRating > 0) Row(
