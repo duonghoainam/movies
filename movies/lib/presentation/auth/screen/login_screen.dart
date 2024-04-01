@@ -20,38 +20,17 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final FormGroup _formGroup = FormGroup({
-    'email': FormControl<String>(value: '', validators: [
+    'email': FormControl<String>(value: 'hoainamum@gmail.com', validators: [
       Validators.email,
       Validators.required,
     ]),
-    'password': FormControl<String>(value: '', validators: [
+    'password': FormControl<String>(value: '12345678', validators: [
       Validators.minLength(8),
       Validators.required,
     ])
   });
 
   final isObscure = ValueNotifier<bool>(true);
-  // ref.listen(signInProvider, (previous, next) async {
-  // if (next.error != null) {
-  // AppToast.showError(context, message: next.error!);
-  // return;
-  // }
-  //
-  // if (next.success == true) {
-  // print('fuck');
-  // canMove = false;
-  //
-  // final user = locator<LocalService>().user;
-  // if (locator<LocalService>().hasPin(user.email)) {
-  // context.pushNamed(PinScreen.enterRouteName);
-  // return ;
-  // }
-  // else {
-  // context.pushNamed(PinScreen.createRouteName).then((value) => canMove = false);
-  // return ;
-  // }
-  // }
-  // });
 
   @override
   Widget build(BuildContext context) {
@@ -139,8 +118,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                         _formGroup.rawValue['email'] as String,
                                     password: _formGroup.rawValue['password']
                                         as String);
-                            //     .then((value) => print(value))
-                            //     .onError((error, stackTrace) => print(error));
                             context.goNamed(HomeScreen.routeName);
                           },
                         ),

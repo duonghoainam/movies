@@ -7,7 +7,7 @@ import 'package:movies/presentation/favorite/favorites_screen.dart';
 import 'package:movies/presentation/home/home_screen.dart';
 import 'package:movies/presentation/profile/profile_screen.dart';
 
-var selectedTabProvider = StateProvider<int>((ref) => 0);
+var selectedTabProvider = StateProvider.autoDispose<int>((ref) => 0);
 
 class MainScreen extends ConsumerStatefulWidget {
   final Widget child;
