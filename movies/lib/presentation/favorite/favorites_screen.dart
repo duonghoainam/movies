@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies/core/model/movie.dart';
+import 'package:movies/core/prefs_instance.dart';
 import 'package:movies/core/widget/movie_card.dart';
+import 'package:movies/presentation/home/home_provider.dart';
 
 
 class FavoritesScreen extends ConsumerWidget {
@@ -10,14 +12,17 @@ class FavoritesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    var state = ref.watch(homeProvider);
+    var listFavorites = PrefsInstance().listFavorites;
 
     return ListView.builder(
         shrinkWrap: true,
         itemBuilder: (context, i) {
-          return const HorizontalMovieCard(
-            movie: Movie.empty(),
-          );
+          var movieId = state.movies[i].id;
+          bool isFavorite = listFavorites.contains(movieId);
+
+          return isFavorite ? HorizontalMovieCard(movie: state.movies[i]) : SizedBox.shrink();
         },
-        itemCount: 0);
+        itemCount: state.movies.length,);
   }
 }

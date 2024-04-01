@@ -4,16 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies/core/constant/color.dart';
 import 'package:movies/core/constant/string.dart';
 import 'package:movies/core/model/movie.dart';
+import 'package:movies/core/prefs_instance.dart';
 import 'package:movies/core/until/untils.dart';
 import 'package:movies/core/widget/actor_circle_widget.dart';
+
+// FutureProvider isSavedProvider = FutureProvider<bool>((ref) => false);
 
 class MovieDetailScreen extends ConsumerWidget {
   static const String routeName = 'movieDetail';
   final Movie movie;
   const MovieDetailScreen(this.movie, {super.key});
+
   @override
   Widget build(BuildContext context, ref) {
-    final sHeight = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
       backgroundColor: AppColors.backgroundApp,
@@ -49,7 +52,7 @@ class MovieDetailScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -85,7 +88,15 @@ class MovieDetailScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border, color: AppColors.white,))
+                    IconButton(onPressed: () async {
+                      var isSaved = await PrefsInstance().checkFavorites(movie.id);
+
+                      if (isSaved){
+                        PrefsInstance().removeFavorites(movie.id);
+                      } else {
+                        PrefsInstance().addFavorite(movie.id);
+                      }
+                    }, icon: Icon(Icons.favorite_border, color: AppColors.white,))
                   ],
                 ),
                 if (movie.imdbRating > 0) Row(

@@ -72,27 +72,6 @@ class HorizontalMovieCard extends StatelessWidget {
                                       const TextStyle(color: AppColors.white),
                                 )),
                       ])
-                      // child: Container(
-                      //      height: 20,
-                      //      alignment: Alignment.topLeft,
-                      //      decoration:  BoxDecoration(
-                      //        image: DecorationImage(
-                      //            fit: BoxFit.cover,
-                      //            image: CachedNetworkImageProvider(movie.posterUrl),
-                      //        ),
-                      //          borderRadius: const BorderRadius.only(bottomRight: Radius.circular(5), topRight: Radius.circular(5)),
-                      //      ),
-                      //      child: movie.contentRating.isEmpty ? SizedBox():
-                      //      Container(
-                      //        padding: const EdgeInsets.symmetric(horizontal: 5),
-                      //          decoration: ShapeDecoration(
-                      //            color: AppColors.red,
-                      //            shape: RoundedRectangleBorder(
-                      //              borderRadius: BorderRadius.circular(5)
-                      //            )
-                      //          ),
-                      //          child: Text(movie.contentRating, style: const TextStyle(color: AppColors.white),)),
-                      //    ),
                       ),
                 ),
               ),
@@ -167,9 +146,6 @@ class HorizontalMovieCard extends StatelessWidget {
                                 color: AppColors.white,
                               ),
                             ))
-                            // StarDisplay(
-                            //   value: ((rate * 5) / 10).round(),
-                            // ),
                             ),
                       ],
                     ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies/core/constant/string.dart';
 import 'package:movies/core/constant/theme.dart';
+import 'package:movies/core/locator.dart';
 import 'package:movies/core/navigation/routers.dart';
 import 'package:movies/firebase_options.dart';
 void main() {
@@ -11,6 +12,7 @@ void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
+    await setupLocator();
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
       runApp(const ProviderScope(

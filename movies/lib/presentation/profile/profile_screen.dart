@@ -7,8 +7,6 @@ import 'package:movies/core/constant/string.dart';
 import 'package:movies/core/until/untils.dart';
 import 'package:movies/core/widget/app_button.dart';
 import 'package:movies/presentation/auth/screen/login_screen.dart';
-import 'package:movies/presentation/home/widget/search_field.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   static const String routeName = 'profile';
