@@ -5,6 +5,7 @@ class AppButton extends StatelessWidget {
   final void Function() onTap;
   final String label;
   final Color color;
+  final Color textColor;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry padding;
   final Widget? prefix;
@@ -12,6 +13,7 @@ class AppButton extends StatelessWidget {
   final Size? size;
   final bool loading;
   final bool disabled;
+  final bool primary;
 
   const AppButton(
       {super.key,
@@ -20,11 +22,14 @@ class AppButton extends StatelessWidget {
       this.size,
       this.loading = false,
       this.disabled = false,
+      this.primary = true,
       this.prefix,
       this.suffix,
       this.margin,
       this.padding = const EdgeInsets.symmetric(vertical: 12),
-      this.color = AppColors.red});
+      this.color = AppColors.red,
+      this.textColor = AppColors.white
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,7 @@ class AppButton extends StatelessWidget {
       fixedSize: size,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
+        side: BorderSide(color: AppColors.red)
       ),
       backgroundColor: loading || disabled ? AppColors.grey : color,
     );
@@ -44,8 +50,8 @@ class AppButton extends StatelessWidget {
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: AppColors.white,
+            style: TextStyle(
+              color: textColor,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
