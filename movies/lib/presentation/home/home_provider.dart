@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movies/core/constant/api_paths.dart';
 import 'package:movies/core/model/movie.dart';
 import 'package:movies/core/service/network_service.dart';
-
+import 'package:logger/logger.dart';
 class HomeState {
   final List<Movie> movies;
   final bool loading;
@@ -66,6 +67,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
 
     await _apiService.getList(ApiPaths.baseUrl)
     .then((value) {
+      Logger().wtf(value);
       final json = jsonDecode(value);
       var movies = (json as List).map((e) {
         return Movie.fromJson(e);
