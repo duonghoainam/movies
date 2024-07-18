@@ -10,6 +10,14 @@ Future<void> setupLocator() async {
     return prefs;
   });
 
+  locator.registerSingleton<GlobalKey<NavigatorState>>(
+      GlobalKey(debugLabel: "Main Navigator"),
+      instanceName: 'app_key');
+
+  locator.registerSingleton<GlobalKey<NavigatorState>>(
+      GlobalKey(debugLabel: "Main Navigator"),
+      instanceName: 'main_key');
+
   await locator.allReady(timeout: const Duration(seconds: 5));
 }
 

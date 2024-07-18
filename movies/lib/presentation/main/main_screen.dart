@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies/core/constant/color.dart';
 import 'package:movies/core/constant/string.dart';
+import 'package:movies/presentation/barcode/bar_code_screen.dart';
+import 'package:movies/presentation/drawing/draw_screen.dart';
 import 'package:movies/presentation/favorite/favorites_screen.dart';
 import 'package:movies/presentation/home/home_screen.dart';
 import 'package:movies/presentation/profile/profile_screen.dart';
+import 'package:movies/presentation/test_screen/test_screen.dart';
 
 var selectedTabProvider = StateProvider.autoDispose<int>((ref) => 0);
 
@@ -28,14 +31,17 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       if (next != previous) {
         switch (next) {
           case 0:
-            context.goNamed(HomeScreen.routeName);
+            context.goNamed(DrawScreen.routeName);
             break;
           case 1:
-            context.goNamed(FavoritesScreen.routeName);
+            context.goNamed(BarcodeScannerView.routeName);
             break;
           case 2:
-            context.goNamed(ProfileScreen.routeName);
+            context.goNamed(DetectImgScreen.routeName);
             break;
+          // case 3:
+          //   context.goNamed(DetectImgScreen.routeName);
+          //   break;
         }
       }
     });

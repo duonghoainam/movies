@@ -5,6 +5,7 @@ import 'package:movies/core/constant/color.dart';
 import 'package:movies/core/constant/string.dart';
 import 'package:movies/core/widget/app_button.dart';
 import 'package:movies/presentation/auth/screen/login_screen.dart';
+import 'package:movies/presentation/home/home_screen.dart';
 
 class OnboardScreen extends StatelessWidget {
   static const String routeName = 'onboard';
@@ -62,7 +63,7 @@ class OnboardScreen extends StatelessWidget {
         AppButton(
           margin: const EdgeInsets.all(20),
           onTap: () {
-            context.pushNamed(LoginScreen.routeName);
+            context.pushNamed(HomeScreen.routeName);
           },
           label: AppString.textGetStarted,
         ),
